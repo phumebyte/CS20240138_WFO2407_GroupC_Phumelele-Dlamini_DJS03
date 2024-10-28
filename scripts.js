@@ -152,24 +152,8 @@ document.querySelector('[data-search-form]').addEventListener('submit', (event) 
     document.querySelector('[data-list-items]').innerHTML = ''
     const newItems = document.createDocumentFragment()
 
-    for (const { author, id, image, title } of result.slice(0, BOOKS_PER_PAGE)) {
-        const element = document.createElement('button')
-        element.classList = 'preview'
-        element.setAttribute('data-preview', id)
-    
-        element.innerHTML = `
-            <img
-                class="preview__image"
-                src="${image}"
-            />
-            
-            <div class="preview__info">
-                <h3 class="preview__title">${title}</h3>
-                <div class="preview__author">${authors[author]}</div>
-            </div>
-        `
-
-        newItems.appendChild(element)
+    for (const book of result.slice(0, BOOKS_PER_PAGE0)){
+        newItems.appendChild(createBookElement(book))
     }
 
     document.querySelector('[data-list-items]').appendChild(newItems)
