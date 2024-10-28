@@ -3,9 +3,8 @@ import { books, authors, genres, BOOKS_PER_PAGE } from './data.js'
 let currentPage = 1;
 let filteredBooks = books;
 
-const initialBookList = document.createDocumentFragment()
-
-for (const { author, id, image, title } of filteredBooks.slice(0, BOOKS_PER_PAGE)) {
+//Function to create HTML element for a book
+function createBookElement({ author, id, image, title }){
     const bookElement = document.createElement('button')
     bookElement.classList = 'preview'
     bookElement.setAttribute('data-preview', id)
@@ -21,8 +20,14 @@ for (const { author, id, image, title } of filteredBooks.slice(0, BOOKS_PER_PAGE
             <div class="preview__author">${authors[author]}</div>
         </div>
     `
+    return bookElement
+}
 
-    initialBookList.appendChild(bookElement)
+const initialBookList = document.createDocumentFragment()
+
+// Filters and appends all initial books to book list
+for (const book of filteredBooks.slice(0, BOOKS_PER_PAGE)) {
+    initialBookList.appendChild(book)
 }
 
 document.querySelector('[data-list-items]').appendChild(initialBookList)
