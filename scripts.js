@@ -54,23 +54,16 @@ function createOptionElements(data, defaultText){
     return fragment
 }
 
-if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.querySelector('[data-settings-theme]').value = 'night'
-    document.documentElement.style.setProperty('--color-dark', '255, 255, 255');
-    document.documentElement.style.setProperty('--color-light', '10, 10, 20');
-} else {
-    document.querySelector('[data-settings-theme]').value = 'day'
-    document.documentElement.style.setProperty('--color-dark', '10, 10, 20');
-    document.documentElement.style.setProperty('--color-light', '255, 255, 255');
+// Function that handles theme toggling
+function toggleTheme(theme) {
+    if(theme === 'night'){
+        document.documentElement.style.setProperty('--color-dark', '255, 255, 255');
+        document.documentElement.style.setProperty('--color-light', '10, 10, 20');
+    } else {
+        document.documentElement.style.setProperty('--color-dark', '10, 10, 20');
+        document.documentElement.style.setProperty('--color-light', '255, 255, 255');
+    }
 }
-
-document.querySelector('[data-list-button]').innerText = `Show more (${books.length - BOOKS_PER_PAGE})`
-document.querySelector('[data-list-button]').disabled = (filteredBooks.length - (currentPage * BOOKS_PER_PAGE)) > 0
-
-document.querySelector('[data-list-button]').innerHTML = `
-    <span>Show more</span>
-    <span class="list__remaining"> (${(filteredBooks.length - (currentPage * BOOKS_PER_PAGE)) > 0 ? (filteredBooks.length - (currentPage * BOOKS_PER_PAGE)) : 0})</span>
-`
 
 document.querySelector('[data-search-cancel]').addEventListener('click', () => {
     document.querySelector('[data-search-overlay]').open = false
@@ -205,6 +198,22 @@ function init(){
     renderBookList(filteredBooks.slice(0, BOOKS_PER_PAGE));
     document.querySelector('[data-search-genres]').appendChild(createOptionElements(genres, 'All Genres'));
     document.querySelector('[data-search-authors]').appendChild(createOptionElements(authors, 'All Authors'));
+
+    // Abstracted theme toggle function - triggered when initialisation function is called
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector('[data-settings-theme]').value = 'night'
+        handleThemeChange('night');
+    } else {
+        document.querySelector('[data-settings-theme]').value = 'day'
+        handleThemeChange('day');
+    }
+    document.querySelector('[data-list-button]').innerText = `Show more (${books.length - BOOKS_PER_PAGE})`
+    document.querySelector('[data-list-button]').disabled = (filteredBooks.length - (currentPage * BOOKS_PER_PAGE)) > 0
+
+    document.querySelector('[data-list-button]').innerHTML = `
+    <span>Show more</span>
+    <span class="list__remaining"> (${(filteredBooks.length - (filteredBooks * BOOKS_PER_PAGE)) > 0 ? (filteredBooks.length - (currentPage * BOOKS_PER_PAGE)) : 0})</span>
+`
 }
 
 init()
