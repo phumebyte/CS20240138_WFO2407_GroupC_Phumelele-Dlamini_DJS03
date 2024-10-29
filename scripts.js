@@ -111,17 +111,17 @@ function addEventListeners() {
     document.querySelector('[data-list-close]').addEventListener('click', () => {
         document.querySelector('[data-list-active]').open = false
     })
-}
 
-document.querySelector('[data-settings-form]').addEventListener('submit', (event) => {
+    document.querySelector('[data-settings-form]').addEventListener('submit', (event) => {
     event.preventDefault()
     const formData = new FormData(event.target)
     const { theme } = Object.fromEntries(formData)
 
         toggleTheme(theme)
-        
+
     document.querySelector('[data-settings-overlay]').open = false
-})
+    })
+}
 
 document.querySelector('[data-search-form]').addEventListener('submit', (event) => {
     event.preventDefault()
