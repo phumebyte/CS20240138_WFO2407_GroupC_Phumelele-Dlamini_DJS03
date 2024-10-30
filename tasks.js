@@ -39,6 +39,13 @@ export function renderBookList(bookList) {
     document.querySelector('[data-list-items]').appendChild(initialBookList);
 }
 
+/**
+ * Creates HTML option elements for genres or authors.
+ * @param {Object} data - The data object containing genres or authors.
+ * @param {string} defaultText - The default option text.
+ * @returns {DocumentFragment} The document fragment containing the option elements.
+ */
+
 // Function to create options for genres and authors
 export function createOptionElements(data, defaultText) {
     const fragment = document.createDocumentFragment();
@@ -55,6 +62,11 @@ export function createOptionElements(data, defaultText) {
     }
     return fragment;
 }
+
+/**
+ * Handles the theme change for the application.
+ * @param {string} theme - The theme to apply ('day' or 'night').
+ */
 
 // Function to handle theme change
 export function toggleTheme(theme) {
