@@ -100,6 +100,11 @@ function handleSearch(event) {
     document.querySelector('[data-search-overlay]').open = false;
 }
 
+/**
+ * Handles the search form submission.
+ * @param {Event} event - The form submission event.
+ */
+
 // Function to handle book click
 function handleBookClick(event) {
     const pathArray = Array.from(event.path || event.composedPath())
@@ -115,7 +120,7 @@ function handleBookClick(event) {
                 if (result) break;
                 if (singleBook.id === node?.dataset?.preview) result = singleBook
             }
-
+            
             active = result
         }
     }
