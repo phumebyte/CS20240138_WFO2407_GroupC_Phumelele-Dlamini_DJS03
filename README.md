@@ -6,34 +6,28 @@ The "Book Connect" project provides an opportunity for students to refine a full
 
 ![alt text](image.png)
 
-#### Goals
-
-- **Refactor Existing Code**: Analyse and refactor the given JavaScript and HTML code to improve its structure using objects and functions.
-- **Implement Abstraction**: Use abstraction to hide the complex reality while exposing only the necessary parts. This involves creating more generic functions that can perform tasks in a more flexible way.
-- **Documentation**: Write clear comments and documentation for the new code structure to explain the purpose and functionality of code blocks, functions, and objects.
-- **Follow Styleguides**: Adhere to established coding conventions and Styleguides to ensure code readability and maintainability.
-
-#### Tasks
-
-1. **Code Analysis**: Start by understanding the current implementation of the "Book Connect" application, including its HTML structure and JavaScript functionality.
-2. **Plan Refactoring**: Identify sections of the code that can be made more abstract and modular. Look for patterns and repetitive code that can be simplified.
-3. **Implement Abstraction**:
-   - **Objects**: Define objects to represent key elements of the application, such as books, authors, and genres. Utilise the provided data (e.g., `authors`, `genres`, `books`) to populate these objects.
-   - **Functions**: Create functions that handle repetitive tasks, such as rendering the book list, handling user interactions, and applying filters.
-4. **Enhance Functionality**: Ensure that the application remains fully functional after refactoring. Test all features to confirm that users can still search, filter, and view books as intended.
-5. **Documentation and Comments**: Throughout the refactoring process, document your code. Provide comments that explain the purpose and functionality of objects and functions.
-6. **Adherence to Styleguides**: Ensure your code follows JavaScript and HTML coding standards and best practices for readability and maintainability.
-
 #### Discussion and Reflection
 
-After completing the tasks, prepare a brief presentation for your coaching group on the following:
-- The rationale behind the refactoring decisions made, including the choice of objects and functions.
-- How abstraction has made the code more maintainable and extendable.
-- Any challenges faced during the refactoring process and how they were overcome.
-- Reflections on how this exercise has deepened your understanding of JavaScript programming concepts.
+Discussion : 
 
-#### Submission Guidelines
+#### Refactoring decisions made 
+- I used seperate files (script.js and tasks.js) that seperate general functionality and the repetitive tasks. The division means that each file has a clear responsibility. This enhances modularity because all the repetitive tasks can be applied to file containing main application logic.
+- In tasks.js, I used reusable functions, which enhances modularity and and code reusability.
+   - **createBookElement** - This function abstracts the creation of individual book elements into a single, reusable unit. It accepts a book object and returns a button element representing the book. Any part of the app can call this function to create book elements without duplicating code for setting up HTML structure, classes, or content.
+   - **renderBookList** - This function renders a list of books by calling createBookElement for each book in the provided list. This function abstracts the task of adding multiple book elements to the DOM, making it easy to render different sets of books based on filters or pagination.
+   - **createOptionElements** - This function generates a dropdown menu for genres or authors by creating <option> elements based on input data. Instead of writing dropdown code repeatedly, this function builds it dynamically, making it highly reusable.
+   - **toggleTheme** - This function handles theme changes in a modular way, applying specific color schemes based on the theme passed as a parameter. The function's encapsulation allows theme-switching logic to be centrally managed and easily updated.
+- In script.js, I grouped the event listeners into modular functions
+- Filtering in the Search function applied abstraction by filtering through the books array based on multiple conditions instead of one. The handleSearch() function reduces code duplication by applying multiple filters based on form input.
 
-Submit the refactored version of the "Book Connect" application, including all HTML, CSS, and JavaScript files. Ensure that your code is well-documented and adheres to the specified Styleguides. Include a written report covering the discussion and reflection points outlined above.
+#### How abstraction and applied changes improve the codebase
+1. Reusable functions and components make it easier to make changes to modular components rather than refactor everywhere that changes exist. This also reduces redundancy, and makes the code more maintainable.
+2. Debugging will be much easier because each function performs a well defined task, should there be a problem with a specific task, we know that it arises from the task function
+3. The codebase is more extendable because each component is modular and adding new features is more straighforward. If a new theme option needs to be added, its simpler to extend toggleTheme function with an additional case rather than change the rest of the codebase.
 
-Make sure to submit your project to the LMS on the DJS03 Project Tab.
+#### Impact of documentation
+In this code, documentation helps me understand each function's purpose, inputs, and outputs quickly, making it easier to work on or update specific parts without diving into the details. It clarifies expected behavior, which is useful for debugging, and reducing mistakes. By documenting functions like createBookElement and renderBookList, I know what each one does and how to use it, supporting collaboration and preventing code duplication. The comments make the code more readable and maintainable, and they encourage consistent practices, helping me and others scale and improve the code over time.
+
+#### Challenges
+
+Planning out a refactoring process proved challenging as I did not want to make irreperable changes to the codebase. It was easier to figure out which parts of the code were repetitive and needed modularity and abstraction, however applying the logic was a challenge. 
